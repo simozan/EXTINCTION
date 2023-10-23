@@ -8,7 +8,7 @@
     background: #dddddd;
     width: 1200px;
     height: 600px;
-    padding: 10px;
+    padding: 20px;
     margin: 20px;
     border-radius: 30px;
     box-shadow: inset 0px 0px 20px -6px #615961;
@@ -21,24 +21,40 @@
     background: #cbc6d7;
     width: 80px;
     height: 560px;
-    margin: 20px;
+    margin: 5px;
     border-radius: 30px;
     box-shadow: inset 0px 0px 20px -6px #615961;
 }
 
 #game-area {
-    background: #cbd7c6;
-    width: 900px;
+    background: #c6d7d4;
+    width: 940px;
     height: 560px;
-    margin: 20px;
+    margin: 5px;
     border-radius: 30px;
     box-shadow: inset 0px 0px 20px -6px #615961;
+    position: relative;
 }
 #finish-area {
     background: #ebc9c9;
     width: 80px;
     height: 560px;
-    margin: 20px;
+    margin: 5px;
     border-radius: 30px;
     box-shadow: inset 0px 0px 20px -6px #615961;
+}
+.dino {
+    background: #550707;
+    width: 50px;
+    height: 50px;
+    position:absolute;
+    top: 510px;
+}
+
+.enemy {
+    background: #b0b0eb;
+    width: 30px;
+    height: 30px;
+    position:absolute;
+    top:0;
 }
