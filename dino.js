@@ -46,6 +46,7 @@ function GameLoop() {
     FrameCount++
     moveEnemy()
     collision()
+    checkForWin()
     if (FrameCount % 300 === 0) {
         addEnemy()
     }
@@ -72,8 +73,8 @@ function moveEnemy() {
             oneEnemy.enemyElement.style.top = `${oneEnemy.verticalPosition}px`;
         } else if (oneEnemy.verticalPosition === (560 - oneEnemy.height)) {
             oneEnemy.enemyElement.remove()
-            let i= enemyArray.indexOf(oneEnemy)
-            enemyArray.splice(i,1)
+            let i = enemyArray.indexOf(oneEnemy)
+            enemyArray.splice(i, 1)
         }
     })
 }
@@ -86,12 +87,26 @@ function collision() {
             dinoPosition.x + dinoPosition.width > enemyPosition.x &&
             dinoPosition.y < enemyPosition.y + enemyPosition.height &&
             dinoPosition.y + dinoPosition.height > enemyPosition.y
-            ) {
-                theEnemy.enemyElement.remove()
-                dino.element.remove()
+        ) {
+            theEnemy.enemyElement.remove()
+            dino.element.remove()
         }
     })
 }
 
+function checkForWin() {
+    const theEnd = document.querySelector(".finish")
+    const dinoPositionW = dino.element.getBoundingClientRect();
+    const finishPosition = theEnd.getBoundingClientRect();
+    if (dinoPositionW.x < finishPosition.x + finishPosition.width &&
+        dinoPositionW.x + dinoPositionW.width > finishPosition.x &&
+        dinoPositionW.y < finishPosition.y + finishPosition.height &&
+        dinoPositionW.y + dinoPositionW.height > finishPosition.y
+    ) {
+        console.log("win!!")
+        dino.element.remove()
+    }
+}
 
-    GameLoop()
+
+GameLoop()

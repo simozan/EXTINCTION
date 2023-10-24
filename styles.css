@@ -51,6 +51,15 @@
     top: 510px;
 }
 
+.finish {
+    background: #073401;
+    width: 20px;
+    height: 50px;
+    position:absolute;
+    top: 510px;
+    left: 920px;
+}
+
 .enemy {
     background: #b0b0eb;
     width: 30px;
