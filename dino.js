@@ -14,7 +14,7 @@ class Enemy {
         this.areaWidth = areaWidth;
         this.areaHeight = areaHeight;
         this.width = 30;
-        this.height = 30;
+        this.height = 70;
         //this.isfalling = true;
         this.verticalPosition = 0;
         this.horizontalPosition = Math.floor(Math.random() * (areaWidth - this.width));
@@ -28,13 +28,12 @@ class Enemy {
 
 function moveDino(event) {
     if (event.key === "ArrowLeft") {
-        dino.element.classList.replace("dino","dino.left")
+        dino.element.classList.replace("dino","dino-left")
         if (dino.dinoPositionX === 0) { dino.dinoPositionX = 0 }
         else if (dino.dinoPositionX > 0) { dino.dinoPositionX -= 10 }
     }
     else if (event.key === "ArrowRight") {
         dino.element.classList.replace("dino-left","dino")
-        dino.element.classList.add("dino")
         if (dino.dinoPositionX === 890) { dino.dinoPositionX = 890 }
         else if (dino.dinoPositionX < 890) { dino.dinoPositionX += 10 }
     }
