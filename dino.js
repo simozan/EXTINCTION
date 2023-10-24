@@ -15,7 +15,7 @@ class Enemy {
         this.areaHeight = areaHeight;
         this.width = 30;
         this.height = 30;
-        this.isfalling = true;
+        //this.isfalling = true;
         this.verticalPosition = 0;
         this.horizontalPosition = Math.floor(Math.random() * (areaWidth - this.width));
         this.enemyElement.style.width = `${this.width} px`;
@@ -45,6 +45,7 @@ function GameLoop() {
     requestAnimationFrame(GameLoop);
     FrameCount++
     moveEnemy()
+    collision()
     if (FrameCount % 300 === 0) {
         addEnemy()
     }
@@ -58,7 +59,7 @@ function addEnemy() {
     console.log("ciao")
     const enemy = document.createElement("div");
     enemy.classList.add("enemy");
-    //const newEnemy= new Enemy (this.boardWidth, this.boardHeight, enemy)
+    //const newEnemy= new Enemy (this.areaWidth, this.areaHeight, enemy)
     const newEnemy = new Enemy(940, 560, enemy)
     enemyArray.push(newEnemy)
     gameArea.appendChild(enemy)
@@ -66,9 +67,31 @@ function addEnemy() {
 
 function moveEnemy() {
     enemyArray.forEach((oneEnemy) => {
-        oneEnemy.verticalPosition++
-        oneEnemy.enemyElement.style.top = `${oneEnemy.verticalPosition}px`;
+        if (oneEnemy.verticalPosition < (560 - oneEnemy.height)) {
+            oneEnemy.verticalPosition++
+            oneEnemy.enemyElement.style.top = `${oneEnemy.verticalPosition}px`;
+        } else if (oneEnemy.verticalPosition === (560 - oneEnemy.height)) {
+            oneEnemy.enemyElement.remove()
+            let i= enemyArray.indexOf(oneEnemy)
+            enemyArray.splice(i,1)
+        }
     })
 }
 
-GameLoop()
+function collision() {
+    enemyArray.forEach((theEnemy) => {
+        const dinoPosition = dino.element.getBoundingClientRect();
+        const enemyPosition = theEnemy.enemyElement.getBoundingClientRect();
+        if (dinoPosition.x < enemyPosition.x + enemyPosition.width &&
+            dinoPosition.x + dinoPosition.width > enemyPosition.x &&
+            dinoPosition.y < enemyPosition.y + enemyPosition.height &&
+            dinoPosition.y + dinoPosition.height > enemyPosition.y
+            ) {
+                theEnemy.enemyElement.remove()
+                dino.element.remove()
+        }
+    })
+}
+
+
+    GameLoop()
