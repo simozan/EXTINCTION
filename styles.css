@@ -35,6 +35,7 @@
     box-shadow: inset 0px 0px 20px -6px #615961;
     position: relative;
 }
+
 #finish-area {
     background: #ebc9c9;
     width: 80px;
@@ -43,11 +44,22 @@
     border-radius: 30px;
     box-shadow: inset 0px 0px 20px -6px #615961;
 }
+
 .dino {
-    background: #550707;
+    background-image: url("images/dino1.jpg");
+    background-size: cover;
     width: 50px;
     height: 50px;
-    position:absolute;
+    position: absolute;
+    top: 510px;
+}
+
+.dino-left {
+    background-image: url("images/dino2left3.jpg");
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    position: absolute;
     top: 510px;
 }
 
@@ -55,7 +67,7 @@
     background: #073401;
     width: 20px;
     height: 50px;
-    position:absolute;
+    position: absolute;
     top: 510px;
     left: 920px;
 }
@@ -64,6 +76,6 @@
     background: #b0b0eb;
     width: 30px;
     height: 30px;
-    position:absolute;
-    top:0;
+    position: absolute;
+    top: 0;
 }

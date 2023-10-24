@@ -28,10 +28,13 @@ class Enemy {
 
 function moveDino(event) {
     if (event.key === "ArrowLeft") {
+        dino.element.classList.replace("dino","dino.left")
         if (dino.dinoPositionX === 0) { dino.dinoPositionX = 0 }
         else if (dino.dinoPositionX > 0) { dino.dinoPositionX -= 10 }
     }
     else if (event.key === "ArrowRight") {
+        dino.element.classList.replace("dino-left","dino")
+        dino.element.classList.add("dino")
         if (dino.dinoPositionX === 890) { dino.dinoPositionX = 890 }
         else if (dino.dinoPositionX < 890) { dino.dinoPositionX += 10 }
     }
