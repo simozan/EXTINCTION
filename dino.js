@@ -80,9 +80,12 @@ let FrameCount = 0;
 function GameLoop() {
     requestAnimationFrame(GameLoop);
     FrameCount++
+    if(dino){
+        checkForWin()
+
+    }
     moveEnemy()
     collision()
-    checkForWin()
     if (FrameCount % 300 === 0) {
         addEnemy()
     }
@@ -142,8 +145,13 @@ function checkForWin() {
         dinoPositionW.y + dinoPositionW.height > finishPosition.y
     ) {
         console.log("win!!")
-        dino.element.remove()
-        savedDinosArray.push(dino)
+        finishArea.appendChild(dino.element)
+        dino.element.style.top=`0px`;
+        dino.element.style.left=`0px`;
+       // dino.element.remove()
+        //savedDinosArray.push(dino)
+        newPlayer ()
+    }
 
 }
 
