@@ -4,14 +4,14 @@ const startArea = document.querySelector("#start-area")
 const gameArea = document.querySelector("#game-area")
 const finishArea = document.querySelector("#finish-area")
 class Dino {
-    constructor(color) {
-        this.color = color;
+    constructor(image) {
+        this.image = image;
         this.dinoPositionX = 0
         this.element = this.createDinoElement()
     }
     createDinoElement() {
         const element = document.createElement("div");
-        element.style.backgroundColor = this.color
+        element.style.backgroundImage = `url(${this.image})`
         element.className = "dino";
         startArea.appendChild(element)
        // gameBoard.appendChild(element)
@@ -20,12 +20,12 @@ class Dino {
 }
 
 let dino;
-const arrayOfDinColor = ["red", "blue", "violet", "yellow", "green", "black", "pink"]
+const arrayOfDinBackgrounfimage = ["images/dinossiluhettes/trexright.png", "images/dinossiluhettes/dinoright.png", "images/dinossiluhettes/dino2right.png", "images/dinossiluhettes/dino3right.png", "images/dinossiluhettes/tricepright.png", "images/dinossiluhettes/velciright.png"]
 const dinosArray = []
 const savedDinosArray=[]
 function createNewDino() {
-    arrayOfDinColor.forEach(aColor => {
-        const dino = new Dino(aColor);
+    arrayOfDinBackgrounfimage.forEach(aImage => {
+        const dino = new Dino(aImage);
         dinosArray.push(dino)
     });
 }

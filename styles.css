@@ -55,20 +55,21 @@
 }
 
 .dino {
-    background-color: blue;
+    background-image: url("images/dinossiluhettes/dinoright.png");
     background-size: cover;
     width: 75px;
     height: 75px;
     position: relative;
+    transform: scaleX(1);
 }
 
 .dino-left {
-    background-image: url("images/dino.defleft.png");
     background-size: cover;
     width: 100px;
     height: 100px;
     position: absolute;
     top: 460px;
+    transform: scaleX(-1);
 }
 
 .finish {
