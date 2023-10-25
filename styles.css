@@ -24,6 +24,10 @@
     margin: 5px;
     border-radius: 30px;
     box-shadow: inset 0px 0px 20px -6px #615961;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #game-area {
@@ -47,12 +51,11 @@
 }
 
 .dino {
-    background-image: url("images/dino.defright.png");
+    background-color: blue;
     background-size: cover;
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    top: 460px;
+    width: 75px;
+    height: 75px;
+    position: relative;
 }
 
 .dino-left {

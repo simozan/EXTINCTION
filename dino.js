@@ -1,13 +1,47 @@
 
+const gameBoard =document.querySelector("#game-board")
+const startArea = document.querySelector("#start-area")
+const gameArea = document.querySelector("#game-area")
+const finishArea = document.querySelector("#finish-area")
 class Dino {
-    constructor() {
+    constructor(color) {
+        this.color = color;
         this.dinoPositionX = 0
-        this.element = document.querySelector(".dino")
+        this.element = this.createDinoElement()
+    }
+    createDinoElement() {
+        const element = document.createElement("div");
+        element.style.backgroundColor = this.color
+        element.className = "dino";
+        startArea.appendChild(element)
+       // gameBoard.appendChild(element)
+        return element;
     }
 }
 
-let dino = new Dino
+let dino;
+const arrayOfDinColor = ["red", "blue", "violet", "yellow", "green", "black", "pink"]
+const dinosArray = []
+const savedDinosArray=[]
+function createNewDino() {
+    arrayOfDinColor.forEach(aColor => {
+        const dino = new Dino(aColor);
+        dinosArray.push(dino)
+    });
+}
 
+createNewDino()
+
+function newPlayer (){
+   gameArea.appendChild(dinosArray[dinosArray.length-1].element)
+    dino=dinosArray[dinosArray.length-1]
+    dino.element.style.top = `${460}px`
+    dinosArray.pop();
+}
+
+setTimeout(() => {
+    newPlayer ()
+}, 2000);
 class Enemy {
     constructor(areaWidth, areaHeight, element) {
         this.enemyElement = element;
@@ -28,12 +62,12 @@ class Enemy {
 
 function moveDino(event) {
     if (event.key === "ArrowLeft") {
-        dino.element.classList.replace("dino","dino-left")
+        dino.element.classList.replace("dino", "dino-left")
         if (dino.dinoPositionX === 0) { dino.dinoPositionX = 0 }
         else if (dino.dinoPositionX > 0) { dino.dinoPositionX -= 10 }
     }
     else if (event.key === "ArrowRight") {
-        dino.element.classList.replace("dino-left","dino")
+        dino.element.classList.replace("dino-left", "dino")
         if (dino.dinoPositionX === 890) { dino.dinoPositionX = 890 }
         else if (dino.dinoPositionX < 890) { dino.dinoPositionX += 10 }
     }
@@ -54,7 +88,6 @@ function GameLoop() {
     }
 }
 
-const gameArea = document.querySelector("#game-area")
 
 let enemyArray = [];
 
@@ -92,6 +125,9 @@ function collision() {
         ) {
             theEnemy.enemyElement.remove()
             dino.element.remove()
+            setTimeout(() => {
+                newPlayer ()
+            }, 2000);
         }
     })
 }
@@ -107,7 +143,8 @@ function checkForWin() {
     ) {
         console.log("win!!")
         dino.element.remove()
-    }
+        savedDinosArray.push(dino)
+
 }
 
 
