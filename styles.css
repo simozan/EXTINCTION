@@ -120,12 +120,22 @@
     text-align: center;
 }
 
-.gameOver{
+.game-over{
     top: 150px;
     left: 330px;
     position: absolute;
     font-family: 'Jurassic Park';
     font-size: 80px;
     letter-spacing: 8px;
+    color: whitesmoke;
+}
+
+.game-over2{
+    top: 250px;
+    left: 200px;
+    position: absolute;
+    font-family: 'Jurassic Park';
+    font-size: 50px;
+    letter-spacing: 5px;
     color: whitesmoke;
 }

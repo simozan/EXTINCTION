@@ -5,16 +5,18 @@ const gameArea = document.querySelector("#game-area")
 const finishArea = document.querySelector("#finish-area")
 const title = document.querySelector(".title")
 const button = document.querySelector(".button")
-let gameOn = false;
+let gameOn = true;
 
 button.addEventListener("click", () => startGame())
 
 function startGame() {
-    gameOn = true; 
-    newPlayer() 
+    newPlayer()
     button.remove()
     title.remove()
-    GameLoop()
+    if(gameOn){
+        GameLoop()
+    }
+    document.addEventListener("keydown", moveDino)
 }
 
 
@@ -29,7 +31,6 @@ class Dino {
         element.style.backgroundImage = `url(${this.image})`
         element.className = "dino";
         startArea.appendChild(element)
-        // gameBoard.appendChild(element)
         return element;
     }
 }
@@ -62,7 +63,6 @@ class Enemy {
         this.areaHeight = areaHeight;
         this.width = 30;
         this.height = 70;
-        //this.isfalling = true;
         this.verticalPosition = 0;
         this.horizontalPosition = Math.floor(Math.random() * (areaWidth - this.width));
         this.enemyElement.style.width = `${this.width} px`;
@@ -74,22 +74,25 @@ class Enemy {
 
 
 function moveDino(event) {
-    if (event.key === "ArrowLeft") {
-        dino.element.classList.replace("dino", "dino-left")
-        if (dino.dinoPositionX === 0) { dino.dinoPositionX = 0 }
-        else if (dino.dinoPositionX > 0) { dino.dinoPositionX -= 10 }
+    if (gameOn) {
+        if (event.key === "ArrowLeft") {
+            dino.element.classList.replace("dino", "dino-left")
+            if (dino.dinoPositionX === 0) { dino.dinoPositionX = 0 }
+            else if (dino.dinoPositionX > 0) { dino.dinoPositionX -= 20 }
+        }
+        else if (event.key === "ArrowRight") {
+            dino.element.classList.replace("dino-left", "dino")
+            if (dino.dinoPositionX === 890) { dino.dinoPositionX = 890 }
+            else if (dino.dinoPositionX < 890) { dino.dinoPositionX += 20 }
+        }
+        dino.element.style.left = `${dino.dinoPositionX}px`
+
     }
-    else if (event.key === "ArrowRight") {
-        dino.element.classList.replace("dino-left", "dino")
-        if (dino.dinoPositionX === 890) { dino.dinoPositionX = 890 }
-        else if (dino.dinoPositionX < 890) { dino.dinoPositionX += 10 }
-    }
-    dino.element.style.left = `${dino.dinoPositionX}px`
 }
-document.addEventListener("keydown", moveDino)
 
 
 let FrameCount = 0;
+let speed = 200;
 
 function GameLoop() {
     requestAnimationFrame(GameLoop);
@@ -99,8 +102,12 @@ function GameLoop() {
     }
     moveEnemy()
     collision()
-    if (FrameCount % 300 === 0) {
+    if (FrameCount % speed === 0) {
         addEnemy()
+    }
+    if (FrameCount % 400 === 0) {
+        speed = speed / 2
+        console.log("nextlevel", speed)
     }
 }
 
@@ -108,10 +115,8 @@ function GameLoop() {
 let enemyArray = [];
 
 function addEnemy() {
-    console.log("ciao")
     const enemy = document.createElement("div");
     enemy.classList.add("enemy");
-    //const newEnemy= new Enemy (this.areaWidth, this.areaHeight, enemy)
     const newEnemy = new Enemy(940, 560, enemy)
     enemyArray.push(newEnemy)
     gameArea.appendChild(enemy)
@@ -120,7 +125,7 @@ function addEnemy() {
 function moveEnemy() {
     enemyArray.forEach((oneEnemy) => {
         if (oneEnemy.verticalPosition < (560 - oneEnemy.height)) {
-            oneEnemy.verticalPosition++
+            oneEnemy.verticalPosition += 2
             oneEnemy.enemyElement.style.top = `${oneEnemy.verticalPosition}px`;
         } else if (oneEnemy.verticalPosition === (560 - oneEnemy.height)) {
             oneEnemy.enemyElement.remove()
@@ -170,8 +175,13 @@ function checkForWin() {
 }
 
 function gameOver() {
+    gameOn = false;
     const endOfGame = document.createElement("H1");
     gameArea.appendChild(endOfGame)
-    endOfGame.innerText = `GAME OVER! You saved ${savedDinosArray.length} dinos from extinction`
-    let GameOn = false
+    endOfGame.innerText = `GAME OVER!`
+    endOfGame.classList.add("game-over")
+    const endOfGame2 = document.createElement("H2");
+    gameArea.appendChild(endOfGame2)
+    endOfGame2.innerText = `You saved ${savedDinosArray.length} dinos from extinction`
+    endOfGame2.classList.add("game-over2")
 }
