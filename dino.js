@@ -1,8 +1,23 @@
 
-const gameBoard =document.querySelector("#game-board")
+const gameBoard = document.querySelector("#game-board")
 const startArea = document.querySelector("#start-area")
 const gameArea = document.querySelector("#game-area")
 const finishArea = document.querySelector("#finish-area")
+const title = document.querySelector(".title")
+const button = document.querySelector(".button")
+let gameOn = false;
+
+button.addEventListener("click", () => startGame())
+
+function startGame() {
+    gameOn = true; 
+    newPlayer() 
+    button.remove()
+    title.remove()
+    GameLoop()
+}
+
+
 class Dino {
     constructor(image) {
         this.image = image;
@@ -14,7 +29,7 @@ class Dino {
         element.style.backgroundImage = `url(${this.image})`
         element.className = "dino";
         startArea.appendChild(element)
-       // gameBoard.appendChild(element)
+        // gameBoard.appendChild(element)
         return element;
     }
 }
@@ -22,26 +37,24 @@ class Dino {
 let dino;
 const arrayOfDinBackgrounfimage = ["images/dinossiluhettes/trexright.png", "images/dinossiluhettes/dinoright.png", "images/dinossiluhettes/dino2right.png", "images/dinossiluhettes/dino3right.png", "images/dinossiluhettes/tricepright.png", "images/dinossiluhettes/velciright.png"]
 const dinosArray = []
-const savedDinosArray=[]
+const savedDinosArray = []
+
 function createNewDino() {
     arrayOfDinBackgrounfimage.forEach(aImage => {
         const dino = new Dino(aImage);
         dinosArray.push(dino)
     });
 }
-
 createNewDino()
-
-function newPlayer (){
-   gameArea.appendChild(dinosArray[dinosArray.length-1].element)
-    dino=dinosArray[dinosArray.length-1]
-    dino.element.style.top = `${460}px`
+function newPlayer() {
+    gameArea.appendChild(dinosArray[dinosArray.length - 1].element)
+    dino = dinosArray[dinosArray.length - 1]
+    dino.element.style.top = `440px`
+    dino.element.style.height = `100px`
+    dino.element.style.width = `100px`
     dinosArray.pop();
 }
 
-setTimeout(() => {
-    newPlayer ()
-}, 2000);
 class Enemy {
     constructor(areaWidth, areaHeight, element) {
         this.enemyElement = element;
@@ -77,12 +90,12 @@ document.addEventListener("keydown", moveDino)
 
 
 let FrameCount = 0;
+
 function GameLoop() {
     requestAnimationFrame(GameLoop);
     FrameCount++
-    if(dino){
+    if (dino) {
         checkForWin()
-
     }
     moveEnemy()
     collision()
@@ -128,9 +141,9 @@ function collision() {
         ) {
             theEnemy.enemyElement.remove()
             dino.element.remove()
-            setTimeout(() => {
-                newPlayer ()
-            }, 2000);
+            if (dinosArray.length === 0) {
+                gameOver()
+            } else { newPlayer() }
         }
     })
 }
@@ -144,16 +157,21 @@ function checkForWin() {
         dinoPositionW.y < finishPosition.y + finishPosition.height &&
         dinoPositionW.y + dinoPositionW.height > finishPosition.y
     ) {
-        console.log("win!!")
         finishArea.appendChild(dino.element)
-        dino.element.style.top=`0px`;
-        dino.element.style.left=`0px`;
-       // dino.element.remove()
-        //savedDinosArray.push(dino)
-        newPlayer ()
+        dino.element.style.top = `0px`;
+        dino.element.style.left = `0px`;
+        dino.element.style.height = `75px`;
+        dino.element.style.width = `75px`;
+        savedDinosArray.push(dino)
+        if (dinosArray.length === 0) {
+            gameOver()
+        } else { newPlayer() }
     }
-
 }
 
-
-GameLoop()
+function gameOver() {
+    const endOfGame = document.createElement("H1");
+    gameArea.appendChild(endOfGame)
+    endOfGame.innerText = `GAME OVER! You saved ${savedDinosArray.length} dinos from extinction`
+    let GameOn = false
+}

@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/jurassic-park');
+
 * {
     margin: 0;
     padding: 0;
@@ -25,7 +27,7 @@
     border-radius: 30px;
     box-shadow: inset 0px 0px 20px -6px #615961;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     flex-direction: column;
 }
@@ -49,8 +51,8 @@
     border-radius: 30px;
     box-shadow: inset 0px 0px 20px -6px #615961;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: flex-end;
     flex-direction: column;
 }
 
@@ -61,6 +63,7 @@
     height: 75px;
     position: relative;
     transform: scaleX(1);
+    margin: 10px 0;
 }
 
 .dino-left {
@@ -70,6 +73,7 @@
     position: absolute;
     top: 460px;
     transform: scaleX(-1);
+    margin: 10px 0;
 }
 
 .finish {
@@ -89,4 +93,39 @@
     height: 70px;
     position: absolute;
     top: 0;
+}
+
+.title{
+    top: 150px;
+    left: 330px;
+    position: absolute;
+    font-family: 'Jurassic Park';
+    font-size: 80px;
+    letter-spacing: 8px;
+    color: whitesmoke;
+}
+
+.button{
+    top: 240px;
+    left: 440px;
+    position: absolute;
+    background: #c9e4eb;
+    border-radius: 30px;
+    height: 60px;
+    width: 90px;
+    box-shadow: inset 0px 0px 20px -6px #615961;
+    border: none;
+    font-family: 'Jurassic Park';
+    font-size: 40px;
+    text-align: center;
+}
+
+.gameOver{
+    top: 150px;
+    left: 330px;
+    position: absolute;
+    font-family: 'Jurassic Park';
+    font-size: 80px;
+    letter-spacing: 8px;
+    color: whitesmoke;
 }
