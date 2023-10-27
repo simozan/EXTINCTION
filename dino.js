@@ -13,7 +13,7 @@ function startGame() {
     newPlayer()
     button.remove()
     title.remove()
-    if(gameOn){
+    if (gameOn) {
         GameLoop()
     }
     document.addEventListener("keydown", moveDino)
